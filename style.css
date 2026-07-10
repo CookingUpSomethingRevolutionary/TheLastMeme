@@ -106,7 +106,7 @@ p {
     align-items: center;
     z-index: 200;
     animation: fadeOut 3s ease-in-out forwards;
-    animation-delay: 2s;
+    animation-play-state: paused;
 }
 
 .star-wars-content {

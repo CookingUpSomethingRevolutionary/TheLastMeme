@@ -90,15 +90,33 @@
         </div>
         
         <script>
-            // Hide title screen after animation completes
-            document.addEventListener('DOMContentLoaded', function() {
-                setTimeout(function() {
-                    const titleScreen = document.querySelector('.titleScreen');
-                    if (titleScreen) {
-                        titleScreen.classList.add('hidden');
-                    }
-                }, 5000); // Hide after 5 seconds (2s fade out + 3s animation)
+            // Start intro on space bar press
+            document.addEventListener('keydown', function(e) {
+                if (e.code === 'Space') {
+                    e.preventDefault();
+                    startIntro();
+                }
             });
+            
+            function startIntro() {
+                const titleScreen = document.querySelector('.titleScreen');
+                const intro = document.querySelector('.star-wars-intro');
+                const credits = document.querySelector('.credits');
+                
+                if (titleScreen && intro) {
+                    // Remove hidden class and trigger animation
+                    titleScreen.classList.remove('hidden');
+                    intro.style.animationPlayState = 'running';
+                    
+                    // After intro animation completes, hide title screen and show credits
+                    setTimeout(function() {
+                        titleScreen.classList.add('hidden');
+                        if (credits) {
+                            credits.classList.add('playing');
+                        }
+                    }, 5000); // Match intro animation duration
+                }
+            }
         </script>
     </body>
 </html>
