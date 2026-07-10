@@ -66,6 +66,13 @@
         </style>
     </head>
     <body>
+        <div class="startScreen">
+            <div class="start-content">
+                <h1>Press Spacebar to Start</h1>
+                <p>Press any key to begin the Star Wars intro</p>
+            </div>
+        </div>
+        
         <div class="titleScreen">
             <div class="star-wars-intro">
                 <div class="star-wars-content">
@@ -99,9 +106,14 @@
             });
             
             function startIntro() {
+                const startScreen = document.querySelector('.startScreen');
                 const titleScreen = document.querySelector('.titleScreen');
                 const intro = document.querySelector('.star-wars-intro');
                 const credits = document.querySelector('.credits');
+                
+                if (startScreen) {
+                    startScreen.classList.add('hidden');
+                }
                 
                 if (titleScreen && intro) {
                     // Remove hidden class and trigger animation
