@@ -1,137 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>THE LAST MEME</title>
-        <link rel="stylesheet" href="style.css">
-        <style>
-            .star-wars-intro {
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background: black;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                z-index: 200;
-                animation: fadeOut 3s ease-in-out forwards;
-                animation-delay: 2s;
-            }
-            
-            .star-wars-content {
-                text-align: center;
-                color: #ffbe00;
-                font-family: 'Arial Black', sans-serif;
-                text-transform: uppercase;
-            }
-            
-            .star-wars-title {
-                font-size: 4rem;
-                margin-bottom: 1rem;
-                text-shadow: 0 0 20px #ffbe00, 0 0 30px #ffbe00;
-                animation: glow 2s ease-in-out infinite alternate;
-            }
-            
-            .star-wars-subtitle {
-                font-size: 1.5rem;
-                margin-bottom: 2rem;
-                letter-spacing: 3px;
-            }
-            
-            .star-wars-episode {
-                font-size: 2rem;
-                margin-top: 2rem;
-                opacity: 0;
-                animation: fadeIn 2s ease-in-out forwards;
-                animation-delay: 1s;
-            }
-            
-            @keyframes fadeOut {
-                0% { opacity: 1; }
-                100% { opacity: 0; }
-            }
-            
-            @keyframes glow {
-                from { text-shadow: 0 0 20px #ffbe00, 0 0 30px #ffbe00; }
-                to { text-shadow: 0 0 30px #ffbe00, 0 0 40px #ffbe00, 0 0 50px #ffbe00; }
-            }
-            
-            @keyframes fadeIn {
-                0% { opacity: 0; transform: translateY(20px); }
-                100% { opacity: 1; transform: translateY(0); }
-            }
-        </style>
-    </head>
-    <body>
-        <div class="startScreen">
-            <div class="start-content">
-                <h1>Press Spacebar to Start</h1>
-                <p>Press any key to begin the Star Wars intro</p>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THE LAST MEME</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- The initial prompt screen -->
+    <div id="start-screen">
+        <div class="prompt-text">PRESS SPACEBAR TO START</div>
+    </div>
+
+    <!-- Smooth horizon fade overlay -->
+    <div class="top-fade"></div> 
+
+    <!-- The 3D view container -->
+    <div class="container" id="crawl-container">
+        <div class="credits">
+            <div class="headings">
+                <h1>Episode 1</h1>
+                <h2>THE LAST MEME</h2>
             </div>
+            <p>It is a period of dark silence. The year is 2126. The tyrannical United States Government has completely banned all digital jokes, image macros, and funny videos to save humanity from "Brainrot," a deadly mental disease spread by excessive internet usage.</p>
+            <p>While the strict ban successfully cured the population's minds, it stripped the country of all happiness. Homeland Security droids now patrol the streets, enforcing mandatory serious faces and scanning for illegal smirks.</p>
+            <p>Deep in the underground network of Ohio, a small band of freedom fighters risks everything to keep the spirit of comedy alive. They have spent years code-breaking an ancient, encrypted hard drive to recover the legendary, forbidden internet archive.</p>
+            <p>Tonight, a lone rebel hacker prepares to broadcast the final surviving piece of humor across the entire national defense grid: the sacred image of a confused orange cat...</p>
         </div>
-        
-        <div class="titleScreen">
-            <div class="star-wars-intro">
-                <div class="star-wars-content">
-                    <div class="star-wars-title">Star Wars</div>
-                    <div class="star-wars-subtitle">The Last Meme</div>
-                    <div class="star-wars-episode">Episode I</div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="container">
-            <div class="credits">
-                <div class="headings">
-                    <h1>Episode I</h1>
-                    <h2>THE LAST MEME</h2>
-                </div>
-                <p>It is a period of dark silence. The year is 2126. The tyrannical United States Government has completely banned all digital jokes, image macros, and funny videos to save humanity from "Brainrot," a deadly mental disease spread by excessive internet laughter.</p>
-                <p>While the strict ban successfully cured the population's minds, it stripped the country of all happiness. Homeland Security droids now patrol the streets, enforcing mandatory serious faces and scanning for illegal smirks.</p>
-                <p>Deep in the underground network of Ohio, a small band of freedom fighters risks everything to keep the spirit of comedy alive. They have spent years code-breaking an ancient, encrypted hard drive to recover the legendary, forbidden internet archive.</p>
-                <p>Tonight, a lone rebel hacker prepares to broadcast the final surviving piece of humor across the entire national defense grid: the sacred image of a confused orange cat...</p>
-            </div>
-        </div>
-        
-        <script>
-            // Start intro on space bar press
-            document.addEventListener('keydown', function(e) {
-                if (e.code === 'Space') {
-                    e.preventDefault();
-                    startIntro();
-                }
-            });
-            
-            function startIntro() {
-                const startScreen = document.querySelector('.startScreen');
-                const titleScreen = document.querySelector('.titleScreen');
-                const intro = document.querySelector('.star-wars-intro');
-                const credits = document.querySelector('.credits');
+    </div>
+
+    <!-- Script to listen for the Spacebar key -->
+    <script>
+        window.addEventListener('keydown', function(event) {
+            // Check if the user pressed the Spacebar
+            if (event.key === ' ' || event.keyCode === 32) {
+                // Prevent default browser behavior like scrolling down the blank page
+                event.preventDefault(); 
                 
-                if (startScreen) {
-                    startScreen.classList.add('hidden');
-                }
+                // Hide the splash screen completely
+                document.getElementById('start-screen').style.display = 'none';
                 
-                if (titleScreen && intro) {
-                    // Remove hidden class and trigger animation
-                    titleScreen.classList.remove('hidden');
-                    intro.style.animationPlayState = 'running';
-                    
-                    // After intro animation completes, hide title screen and show credits
-                    setTimeout(function() {
-                        titleScreen.classList.add('hidden');
-                        if (credits) {
-                            credits.classList.add('playing');
-                        }
-                    }, 5000); // Match intro animation duration
-                }
+                // Add the class that triggers the CSS animation crawl
+                document.getElementById('crawl-container').classList.add('start-crawl');
             }
-        </script>
-    </body>
+        });
+    </script>
+</body>
 </html>
-    
-                
-                 
